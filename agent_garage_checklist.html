@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent Garage Preparation Checklist</title>
+  <style>
+    :root {
+      --bg: #f3f8ff;
+      --card: #ffffff;
+      --text: #16324f;
+      --muted: #5d728a;
+      --line: #d9e8ff;
+      --blue-1: #0f6cbd;
+      --blue-2: #2b88d8;
+      --blue-3: #64b5ff;
+      --blue-4: #e8f3ff;
+      --success: #0a7d41;
+      --shadow: 0 18px 45px rgba(15, 108, 189, 0.14);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(100,181,255,0.24), transparent 30%),
+        radial-gradient(circle at 100% 20%, rgba(43,136,216,0.18), transparent 28%),
+        linear-gradient(180deg, #eef6ff 0%, #f7fbff 45%, #edf5ff 100%);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 36px 24px 56px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: 34px 34px 30px;
+      background: linear-gradient(135deg, #0f6cbd 0%, #247fd0 38%, #64b5ff 100%);
+      color: #fff;
+      box-shadow: 0 24px 54px rgba(15, 108, 189, 0.28);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 280px;
+      height: 280px;
+      top: -100px;
+      right: -80px;
+    }
+
+    .hero::after {
+      width: 180px;
+      height: 180px;
+      left: -60px;
+      bottom: -70px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      backdrop-filter: blur(6px);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      max-width: 780px;
+      margin: 14px 0 0;
+      font-size: 17px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.94);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 18px;
+      padding: 16px 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .stat .value {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat .label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.4;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 22px;
+      margin-top: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.86);
+      border: 1px solid rgba(217,232,255,0.92);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 24px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .panel-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 14px;
+      max-width: 720px;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue-4);
+      color: var(--blue-1);
+      border: 1px solid #cfe5ff;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .checklist {
+      padding: 10px 18px 22px;
+    }
+
+    .item {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 14px;
+      margin: 8px 0;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(247,251,255,0.94));
+      border: 1px solid var(--line);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .item::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 6px;
+      background: linear-gradient(180deg, var(--blue-2), var(--blue-3));
+    }
+
+    .item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(15,108,189,0.12);
+      border-color: #bfdcff;
+    }
+
+    .item input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .checkmark {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      border: 2px solid #8ec4ff;
+      background: #fff;
+      margin-top: 2px;
+      position: relative;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.75);
+      transition: all .18s ease;
+      flex: 0 0 auto;
+    }
+
+    .checkmark::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 13px;
+      border-right: 3px solid #fff;
+      border-bottom: 3px solid #fff;
+      transform: rotate(45deg) scale(0);
+      left: 8px;
+      top: 3px;
+      transition: transform .16s ease;
+    }
+
+    .item input:checked + .checkmark {
+      background: linear-gradient(135deg, var(--blue-1), var(--blue-2));
+      border-color: var(--blue-1);
+      box-shadow: 0 8px 18px rgba(15,108,189,0.25);
+    }
+
+    .item input:checked + .checkmark::after {
+      transform: rotate(45deg) scale(1);
+    }
+
+    .item.done {
+      background: linear-gradient(180deg, #f8fcff, #eef7ff);
+      border-color: #b8dafd;
+    }
+
+    .item-body {
+      min-width: 0;
+    }
+
+    .kicker {
+      color: var(--blue-1);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 6px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .desc {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.52;
+    }
+
+    .side {
+      display: grid;
+      gap: 20px;
+      position: sticky;
+      top: 24px;
+    }
+
+    .card {
+      padding: 22px;
+    }
+
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .progress-wrap {
+      background: #edf6ff;
+      border-radius: 999px;
+      height: 14px;
+      overflow: hidden;
+      border: 1px solid #d6e9ff;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--blue-1), var(--blue-3));
+      transition: width .2s ease;
+      border-radius: 999px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      display: grid;
+      grid-template-columns: 10px 1fr;
+      gap: 10px;
+      color: var(--muted);
+      line-height: 1.48;
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      margin-top: 6px;
+      background: linear-gradient(180deg, var(--blue-2), var(--blue-3));
+      box-shadow: 0 0 0 5px rgba(100,181,255,0.14);
+    }
+
+    .callout {
+      padding: 18px 18px 18px 20px;
+      border-left: 5px solid var(--blue-1);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f9ff);
+      color: var(--muted);
+      line-height: 1.58;
+      font-size: 14px;
+    }
+
+    .callout strong {
+      color: var(--text);
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 940px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+      .side {
+        position: static;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .panel-head {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Interactive one-page preparation document</div>
+      <h1>Agent Garage Preparation Checklist</h1>
+      <p>Use this checklist to prepare a strong use case before the first discussion and the Agent Garage session. The goal is a usable prototype with clear scope, real data, measurable quality, and realistic next steps.</p>
+      <div class="hero-grid">
+        <div class="stat">
+          <div class="value">8</div>
+          <div class="label">Core preparation areas for a solid Agent Garage session</div>
+        </div>
+        <div class="stat">
+          <div class="value">1</div>
+          <div class="label">Shared target: build a functional prototype, not a full production solution</div>
+        </div>
+        <div class="stat">
+          <div class="value" id="heroDone">0%</div>
+          <div class="label">Completion status based on the clickable checklist below</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="content">
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Checklist</h2>
+            <p>Click each box when the topic is prepared and ready for the session.</p>
+          </div>
+          <div class="badge" id="badgeStatus">0 of 8 completed</div>
+        </div>
+
+        <div class="checklist" id="checklist">
+          <label class="item" for="c1">
+            <input type="checkbox" id="c1" />
+            <span class="checkmark" aria-hidden="true"></span>
+            <div class="item-body">
+              <div class="kicker">01</div>
+              <h3 class="title">Use case in one sentence</h3>
+              <p class="desc">Describe in one clear sentence what the agent should do and which value it should create.</p>
+            </div>
+          </label>
+
+          <label class="item" for="c2">
+            <input type="checkbox" id="c2" />
+            <span class="checkmark" aria-hidden="true"></span>
+            <div class="item-body">
+              <div class="kicker">02</div>
+              <h3 class="title">Input, trigger, process, and output</h3>
+              <p class="desc">State what input the agent receives, what starts it, which steps it should perform, and what result is expected.</p>
+            </div>
+          </label>
+
+          <label class="item" for="c3">
+            <input type="checkbox" id="c3" />
+            <span class="checkmark" aria-hidden="true"></span>
+            <div class="item-body">
+              <div class="kicker">03</div>
+              <h3 class="title">Source and target systems</h3>
+              <p class="desc">List the systems the agent needs to read from and the systems it should update, write to, or hand over results to.</p>
+            </div>
+          </label>
+
+          <label class="item" for="c4">
+            <input type="checkbox" id="c4" />
+            <span class="checkmark" aria-hidden="true"></span>
+            <div class="item-body">
+              <div class="kicker">04</div>
+              <h3 class="title">Usable data sources</h3>
+              <p class="desc">Confirm which data is actually available for the session, such as exports, existing documents, or a ready-made Power Platform connection.</p>
+            </div>
+          </label>
+
+          <label class="item" for="c5">
+            <input type="checkbox" id="c5" />
+            <span class="checkmark" aria-hidden="true"></span>
+            <div class="item-body">
+              <div class="kicker">05</div>
+              <h3 class="title">User group and permissions</h3>
+              <p class="desc">Define who will use the agent later and how access, permissions, and restricted data must be handled.</p>
+            </div>
+          </label>
+
+          <label class="item" for="c6">
+            <input type="checkbox" id="c6" />
+            <span class="checkmark" aria-hidden="true"></span>
+            <div class="item-body">
+              <div class="kicker">06</div>
+              <h3 class="title">Agent Garage disclaimer</h3>
+              <p class="desc">The session is meant to create a useful, working prototype. It is not intended to deliver a fully finished production-ready agent.</p>
+            </div>
+          </label>
+
+          <label class="item" for="c7">
+            <input type="checkbox" id="c7" />
+            <span class="checkmark" aria-hidden="true"></span>
+            <div class="item-body">
+              <div class="kicker">07</div>
+              <h3 class="title">Evaluation</h3>
+              <p class="desc">Define how quality and business value will be measured and whether there are clear test cases or success criteria.</p>
+            </div>
+          </label>
+
+          <label class="item" for="c8">
+            <input type="checkbox" id="c8" />
+            <span class="checkmark" aria-hidden="true"></span>
+            <div class="item-body">
+              <div class="kicker">08</div>
+              <h3 class="title">Risks</h3>
+              <p class="desc">Identify what must not happen and which functional, technical, or data-related issues could become a problem.</p>
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <aside class="side">
+        <section class="panel card">
+          <h3>Preparation progress</h3>
+          <div class="progress-wrap" aria-label="Progress bar">
+            <div class="progress" id="progressBar"></div>
+          </div>
+          <div class="progress-meta">
+            <span id="progressText">0% complete</span>
+            <span id="progressCount">0 / 8</span>
+          </div>
+        </section>
+
+        <section class="panel card">
+          <h3>What good preparation looks like</h3>
+          <ul class="mini-list">
+            <li><span class="dot"></span><span>The use case is specific and easy to explain.</span></li>
+            <li><span class="dot"></span><span>Relevant systems and usable data are already known.</span></li>
+            <li><span class="dot"></span><span>Expected outputs and success criteria are measurable.</span></li>
+            <li><span class="dot"></span><span>Access, permissions, and key risks are visible early.</span></li>
+          </ul>
+        </section>
+
+        <section class="panel card">
+          <h3>Important note</h3>
+          <div class="callout">
+            <strong>Agent Garage outcome:</strong> a validated prototype that proves usefulness and feasibility. The production version usually requires further refinement, governance checks, testing, and expansion.
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <div class="footer">This interactive HTML stores checkbox status locally in the browser for convenience.</div>
+  </div>
+
+  <script>
+    (function() {
+      const STORAGE_KEY = 'agent-garage-checklist-v1';
+      const checkboxes = Array.from(document.querySelectorAll('#checklist input[type="checkbox"]'));
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+      const progressCount = document.getElementById('progressCount');
+      const badgeStatus = document.getElementById('badgeStatus');
+      const heroDone = document.getElementById('heroDone');
+
+      function loadState() {
+        try {
+          const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+          checkboxes.forEach(cb => {
+            cb.checked = Boolean(state[cb.id]);
+            cb.closest('.item').classList.toggle('done', cb.checked);
+          });
+        } catch (e) {}
+        update();
+      }
+
+      function saveState() {
+        const state = {};
+        checkboxes.forEach(cb => state[cb.id] = cb.checked);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function update() {
+        const total = checkboxes.length;
+        const done = checkboxes.filter(cb => cb.checked).length;
+        const pct = Math.round((done / total) * 100);
+        progressBar.style.width = pct + '%';
+        progressText.textContent = pct + '% complete';
+        progressCount.textContent = done + ' / ' + total;
+        badgeStatus.textContent = done + ' of ' + total + ' completed';
+        heroDone.textContent = pct + '%';
+      }
+
+      checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+          cb.closest('.item').classList.toggle('done', cb.checked);
+          saveState();
+          update();
+        });
+      });
+
+      loadState();
+    })();
+  </script>
+</body>
+</html>
